@@ -11,14 +11,6 @@ import java.util.Collections;
 
 /**
  * Loads a User from the database for Spring Security authentication.
- *
- * IMPORTANT: this class intentionally does NOT load roles/permissions as
- * GrantedAuthority objects. Authentication only proves "who you are".
- * Authorization ("what you can do") is decided separately, at the moment of
- * the request, by CustomPermissionEvaluator - not baked into the
- * Authentication object here. That is what makes the RBAC dynamic: if
- * permissions change in the database, the very next request is affected,
- * without the user needing to log in again.
  */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
