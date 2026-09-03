@@ -7,23 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- * Seeds the H2 database with a minimal, sensible starting point so the
- * Postman testing flow described in the README can be followed immediately,
- * without a "chicken and egg" problem (someone has to already have
- * CREATE_ROLE/CREATE_PERMISSION/ASSIGN_ROLE permission to bootstrap the rest).
- *
- * On every startup this only INSERTS rows that don't already exist yet
- * (idempotent), so it is safe to restart the app against the persistent
- * H2 file database without creating duplicates.
- *
- * Seeded data:
- *   Permissions: CREATE_ROLE, CREATE_PERMISSION, ASSIGN_ROLE, ASSIGN_PERMISSION, READ_SECURE_DATA
- *   Roles: ADMIN (all permissions), USER (READ_SECURE_DATA)
- *   Users: amit/amit123 -> ADMIN   (use this to bootstrap/manage RBAC data in Postman)
- *          ram/ram123   -> no role yet (assign USER to Ram yourself via Postman,
- *                           per the assignment's demonstration steps)
- */
 @Configuration
 public class DataInitializer {
 
@@ -71,8 +54,6 @@ public class DataInitializer {
             }
 
             // Ram is intentionally left with NO role at startup. Assigning
-            // the USER role to Ram via POST /users/{ramId}/roles/{userRoleId}
-            // is part of the guided Postman flow in the README.
         };
     }
 
