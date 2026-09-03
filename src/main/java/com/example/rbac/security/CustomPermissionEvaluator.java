@@ -17,21 +17,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * This is the heart of the "dynamic" part of this Dynamic RBAC engine.
- *
- * Every time a method annotated with
- *   @PreAuthorize("hasPermission(null, 'SOME_PERMISSION')")
- * is invoked, Spring Security calls hasPermission(...) below. There is no
- * hardcoded role/permission name anywhere in this class - everything is
- * looked up from the database at request time:
- *
- *   1) Direct permission: User -> UserPermission -> Permission
- *   2) Role-based permission: User -> UserRole -> Role -> RolePermission -> Permission
- *
- * Because the check is done fresh on every request, changing the database
- * instantly changes what a currently logged-in user is allowed to do, with zero code changes and no restart.
- */
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
@@ -68,9 +53,6 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     /**
      * Overload used by expressions like
-     * hasPermission(#id, 'SomeType', 'SOME_PERMISSION'). Not used by this
-     * project today, but implemented for completeness since it is part of
-     * the PermissionEvaluator contract.
      */
     @Override
     public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, Object permission) {
