@@ -11,15 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Wires up:
- *  - HTTP Basic authentication (easy to use from Postman: Authorization > Basic Auth).
- *  - Method-level security (@PreAuthorize) via @EnableMethodSecurity.
- *  - The CustomPermissionEvaluator, so that hasPermission(...) expressions in
- *    @PreAuthorize are resolved by OUR database-driven logic instead of Spring's
- *    default (which only understands ACLs on domain objects, not our RBAC model).
- *  - The H2 console, left open for inspecting the database during development/demo.
- */
+
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
